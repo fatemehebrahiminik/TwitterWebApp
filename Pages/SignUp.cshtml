@@ -1,0 +1,70 @@
+﻿@page
+@model TwitterClient.Pages.SignUpModel
+@{
+} 
+@{
+    ViewData["Title"] = "signup for new user";
+} 
+ 
+	<section class="login-page" style="display:grid">
+    <!-- login page nav -->
+    <nav class="login-page-nav">
+        <ul>
+            <li class="brand"><a href="#"><i class="fas fa-dove"></i></a></li>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Language: English</a></li>
+        </ul>
+    </nav>
+    <!-- end of login page nav -->
+    <!-- signup -->
+    <div class="login">
+        <div class="login-content">
+            <h2>SignUP to Twirrer</h2> 
+            	<form class="login-form" method="post">
+								<div class="prompt name">
+									<div data-fieldname="name" class="field">
+										<div class="sidetip"> 
+											<p id="nameerror" role="alert" class="blank invalid error">What's your name?</p>
+										</div>
+										<input type="text" placeholder="Full name" aria-required="true" asp-for="signUpModel.fullname" maxlength="50" id="full-name" class="">
+									</div>
+								</div>
+								
+								<div class="prompt name">
+									<div data-fieldname="name" class="field">
+										<div class="sidetip">
+											<p id="uiderror" role="alert" class="blank invalid error">Write a user name</p>
+										</div>
+										<input type="text" placeholder="User Name" aria-required="true" asp-for="signUpModel.username" maxlength="20" id="uid" class="">
+									</div>
+								</div>
+
+								<div class="prompt email">
+									<div data-fieldname="email" class="field">
+										<div class="sidetip">
+											<p id="emailerror" role="alert" class="invalid error">Please enter a valid email.</p>
+										</div>
+										<input type="text" placeholder="Email" aria-required="true" asp-for="signUpModel.email" class="email-input" id="email">
+									</div>
+								</div>
+								<div class="prompt password">
+									<div data-fieldname="password" class="field">
+										<div class="sidetip">
+											<p id="passerror" role="alert" class="blank error">Please enter a password.</p>
+										</div>
+										<input type="password" placeholder="Password" aria-required="true" id="password" asp-for="signUpModel.password">
+									</div>
+								</div>
+							<div class="doit">
+								<div class="sign-up-box">
+									<input type="submit" value="Sign up" id="submit_button" class="signup EdgeButton EdgeButton--primary EdgeButton--large submit">
+								</div>
+							</div>
+						</form>
+        </div>
+       <p>@TempData["message"]</p>
+    </div>
+    <!-- end of signup -->
+  
+</section>

@@ -1,0 +1,150 @@
+﻿@page "/profile"
+@model TwitterClient.Pages.profileModel
+@{
+     ViewData["Title"] = "Feeds";
+}
+
+
+	<section class="feeds-page" style="display:grid">
+            <!-- feeds nav -->
+            <nav class="feeds-nav dark-mode-1">
+            
+               
+                <div class="user">
+                    <div class="user-img-wrapper">
+                        <img src="img/avatar.png" alt="">
+                    </div>
+                    <a href="#" class="user-link light-text">@Model.profile.FullName</a>
+                   
+                </div>
+                   <div class="following light-text">
+                        <p class="following-paragraph"><span>@Model.profile.FollowerCount</span> Following</p>
+                        <p class="following-paragraph"><span>@Model.profile.FollowerCount</span> Followers</p>                         
+                    </div>
+            </nav>
+            <!-- end of feeds nav -->
+
+            <!-- feeds content -->
+            <div class="feeds-content dark-mode-2 border-bottom">
+            <div class="feeds-header dark-mode-1" style="  border-bottom: 0.1rem solid #eee;">
+                <div class="header-top border">
+                    <h4 class="light-text">Home</h4>
+                   
+                </div>
+                <form asp-page-handler="Twite" method="post">
+            <div class="header-post dark-mode-1 ">
+                <div class="header-img-wrapper">
+                    <img src="~/img/avatar.png" class="rotateimg90" alt="">
+                </div>
+
+                <textarea    name="twite" placeholder="What's happenning?" class="modal-input dark-mode-2 light-text border"></textarea>
+         
+
+            </div>
+               <button type="submit" class="post-btn" style="float:right;">
+                <i class="fas fa-feather-alt" style="color:#fff !important"> Post</i>
+            </button>
+            </form>
+            </div>
+
+            <div class="posts dark-mode-1">
+                <div>Your Twittes</div>
+              @foreach(var t in (Model.profile.Twittes ?? new List<TwitterClient.Models.Twitte>()))
+              {  <div class="post border">
+                    <div class="user-avatar">
+                        <img src="img/avatar.png" alt="">
+                    </div>
+                    <div class="post-content">
+                        <div class="post-user-info light-text">
+                            <h4>@Model.profile.FullName</h4>
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <p class="post-text light-text">
+                           @t.TextTwite
+                        </p>
+                        <div class="post-img">
+                            <img src="~/img/img.jpg" alt="">
+                        </div>
+                       	<form asp-page-handler="ReTwite" method="post">
+                        	<input type="hidden" value="@t.Id" name="twiteId"/>
+                        <div class="post-icons"> 
+                            <button type="submit" class="follow-btn dark-mode-2">Retweet</button>
+                          
+                        </div>
+                        </form>
+                    </div>
+                </div>
+}
+               <div>Your Re-Twittes</div>
+              @foreach(var t in (Model.profile.reTwittes ?? new List<TwitterClient.Models.Twitte>()))
+              {  <div class="post border">
+                    <div class="user-avatar">
+                        <img src="img/avatar.png" alt="">
+                    </div>
+                    <div class="post-content">
+                        <div class="post-user-info light-text">
+                            <h4>@Model.profile.FullName</h4>
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <p class="post-text light-text">
+                           @t.TextTwite
+                        </p>
+                        <div class="post-img">
+                            <img src="~/img/img.jpg" alt="">
+                        </div>
+                        	<form asp-page-handler="ReTwite" method="post">
+                        	<input type="hidden" value="@t.Id" name="twiteId"/>
+                        <div class="post-icons"> 
+                         
+                                 <button type="submit" class="follow-btn dark-mode-2">Retweet</button>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+}    
+                <div class="follow dark-mode-1">
+                    <h3 class="follow-heading light-text border">Who to follow</h3>
+                    @foreach(var t in (Model.profile.AllUser ?? new List<TwitterClient.Models.AllUser>()))
+						{
+								<form asp-page-handler="Follow" method="post">
+								
+
+
+  <div class="follow-user border">
+                        <div class="follow-user-img">
+                            <img src="/img/avatar.png" alt="">
+                        </div>
+                        <div class="follow-user-info light-text">
+                            <h4>@t.FullName</h4>
+                            	<input type="hidden" value="@t.Id" name="userId"/>
+                        </div>
+                        <button type="submit" class="follow-btn dark-mode-2">Follow</button>
+                    </div>
+                    </form>
+						}
+                  
+                
+
+            <div class="follow-link">
+                <a href="#">Show more</a>
+            </div>
+            
+        </div>
+        </div>
+            </div>
+
+            <!-- end of feeds content -->
+
+         
+
+           
+
+        
+                    
+          
+
+          
+
+            <!-- end of sidebar -->
+
+        </section>
